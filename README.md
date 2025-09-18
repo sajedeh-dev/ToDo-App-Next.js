@@ -1,8 +1,7 @@
-# 🍲 TO DO APP
+#  TO DO APP
+A Next.js + MongoDB Todo App with user authentication. Users can add, update, delete, and track todos with different statuses (Todo, In Progress, Review, Done). The app features a clean UI, real-time updates, and secure session-based authentication using NextAuth.
 
-**FreshFood** is a modern food menu and category application built with **Next.js**, **React**, and **Tailwind CSS**.  
-This project demonstrates the use of **SSR/SSG** in Next.js and working with **json-server** for temporary data.  
-Users can filter recipes by **difficulty** and **cooking time**, with filters reflected in the URL using query strings.  
+ 
 
 ---
 ## 🚀 Demo
