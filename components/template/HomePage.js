@@ -72,7 +72,7 @@ function HomePage() {
           </div>
 
           {/* لیست تسک‌ها */}
-          <div className="bg-white rounded-2xl h-screen">
+          <div className="bg-white rounded-2xl h-full">
             <Tasks
               data={todos[col.id]}
               fetchTodos={fetchTodos}

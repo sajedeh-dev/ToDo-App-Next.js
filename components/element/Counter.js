@@ -1,11 +1,13 @@
 
 
-function Counter() {
+function Counter({ count }) {
   return (
-    <div className="">
-        <span className=" bg-white shadow-lg py-1 text-sm font-mono ring-1 px-2 rounded-full">1</span>
+    <div>
+      <span className="bg-white shadow-lg py-1 text-sm font-mono ring-1 px-2 rounded-full">
+        {count}
+      </span>
     </div>
-  )
+  );
 }
 
-export default Counter
+export default Counter;

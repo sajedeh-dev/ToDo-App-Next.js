@@ -11,25 +11,27 @@ import "react-toastify/dist/ReactToastify.css";
 function AddTodoPage() {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("todo");
+  const [description , setDescription] = useState("")
 
   const addHandler = async () => {
     const res = await fetch("/api/todos", {
       method: "POST",
-      body: JSON.stringify({ title, status }),
+      body: JSON.stringify({ title, status , description }),
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
     if (data.status === "success") {
       setTitle("");
       setStatus("todo");
+      setDescription("")
       toast.success("Todo added!");
     }
   };
 
   return (
     <div className="flex flex-col gap-10 px-14  overflow-y-auto  bg-gradient-to-tr from-pink-100 to-sky-50 pt-8 border-r rounded-xl shadow-lg">
-      <h2 className="flex items-center gap-4 text-purple-600 ">
-        <GrAddCircle />
+      <h2 className="flex items-center gap-4 text-purple-600 text-2xl ">
+        <GrAddCircle className="text-2xl" />
         Add New Todo
       </h2>
       {/* title */}
@@ -97,9 +99,9 @@ function AddTodoPage() {
           Description:
         </label>
         <textarea
-          // id="description"
-          // value={textDescription}
-          // onChange={(e) => setTextDescription(e.target.value)}
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           className="w-full border rounded-lg p-2 mt-1 h-24 resize-none focus:outline-none focus:ring-2 focus:ring-purple-400"
           placeholder="Write something about yourself..."
         />
