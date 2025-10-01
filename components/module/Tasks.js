@@ -1,9 +1,19 @@
+import { useState } from "react";
+
 import { RiMastodonLine } from "react-icons/ri";
 import { BiRightArrow, BiLeftArrow } from "react-icons/bi";
-
+import { MdOutlineModeEdit } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 
+import EditModal from "./EditTodo";
+
+
+
+
+
 function Tasks({ data, next, back, fetchTodos }) {
+  const [editTask, setEditTask] = useState(null);
+
   const deleteTodo = async (id) => {
     try {
       const res = await fetch("/api/todos", {
@@ -41,25 +51,29 @@ function Tasks({ data, next, back, fetchTodos }) {
 
   return (
     <div className="m-0 px-4 ">
-      
       {data?.map((i) => (
         <div
           key={i._id}
           className="shadow-xl p-4 bg-gradient-to-tr from-pink-100 to-sky-50  rounded-b-xl mt-4 border-t-2 border-sky-300"
         >
           <div className="flex items-center justify-between mb-7">
-          <span
-            className={`w-16 h-2 block  rounded-lg ${
-              statusColors[i.status]
-            }`}
-          ></span>
-          <button
-            className=" text-red-600 rounded-lg text-md"
-            onClick={() => deleteTodo(i._id)}
-          >
-            
-            <FaTrashAlt />
-          </button>
+            <span
+              className={`w-16 h-2 block  rounded-lg ${statusColors[i.status]}`}
+            ></span>
+            <div className="flex items-center gap-4">
+              <button
+                className=" text-green-600 rounded-lg text-lg"
+                onClick={() => setEditTask(i)}
+              >
+                <MdOutlineModeEdit />
+              </button>
+              <button
+                className=" text-red-600 rounded-lg text-md"
+                onClick={() => deleteTodo(i._id)}
+              >
+                <FaTrashAlt />
+              </button>
+            </div>
           </div>
           <RiMastodonLine />
           <h4 className="font-medium text-gray-700">{i.title}</h4>
@@ -86,9 +100,15 @@ function Tasks({ data, next, back, fetchTodos }) {
               </button>
             ) : null}
           </div>
-          
         </div>
       ))}
+      {editTask && (
+        <EditModal
+          task={editTask}
+          onClose={() => setEditTask(null)}
+          fetchTodos={fetchTodos}
+        />
+      )}
     </div>
   );
 }
